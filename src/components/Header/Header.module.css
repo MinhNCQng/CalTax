@@ -1,0 +1,19 @@
+
+.header-container{
+    
+    
+    background-color: #EDEDED;
+    padding: 9px 0px 14px 0px;
+    
+}
+
+.header-wrapper{
+    width: var(--main-width);
+    color: red;
+    font-size: 10px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    
+}

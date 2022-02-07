@@ -1,0 +1,9 @@
+.main-form .group-label{
+    color: var(--main-color);
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.main-form .row-info{
+    margin-bottom: 10px;
+}

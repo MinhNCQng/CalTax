@@ -1,0 +1,21 @@
+.main-container{
+    
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+}
+.main-wrapper {
+    width: var(--main-width);
+    font-size: 13px;
+}
+
+.group-label{
+    color: var(--main-color);
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.row-info{
+    margin-bottom: 10px;
+}
+

@@ -1,0 +1,20 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Lucida Grande,Verdana,Geneva,Sans-serif;
+}
+:root{
+--main-width: 620px;
+--main-color:rgb(69, 97, 150);
+}
+
+
+.text-align-right{
+text-align: right;
+}
+
+
+.margin-top-20px{
+margin-top: 20px;
+}

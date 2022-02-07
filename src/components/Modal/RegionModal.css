@@ -1,0 +1,70 @@
+.backdrop{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #6e4f1c url("../../assets/patterns/region-patterm.png") 50% 50% repeat;
+    opacity: 0.6;
+}
+
+.region-modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 650px;
+    background:#eceadf url("../../assets/patterns/region-modal-pattern.png") 50% 50% repeat;
+    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+    font-size: 14px;
+    color: #1f1f1f;
+}
+
+.region-modal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px;
+    background: #fff url("../../assets/patterns/header-modal-pattern.png") 50% 50% repeat;
+    padding: 5px 5px 5px 15px;
+    cursor: move;
+}
+
+.region-modal-header .modal-title{
+    font-weight: bold;
+}
+
+.region-modal-header .modal-close-button{
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    font-size: 20px;
+    line-height: 18px;
+    background-color: #f8f7f6;
+    vertical-align: middle;
+    color: red;
+    font-weight: 600;
+    cursor: pointer;
+   
+}
+.region-modal-header .modal-close-button:hover{
+    color: white;
+    background: #6e4f1c url("../../assets/patterns/button_hover.png") 50% 50% repeat;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+
+
+.modal-body-content{
+    margin: 20px 0px 40px 0px;
+}
+
+.modal-body-content ul{
+    list-style: "-  ";
+    list-style-position: inside;
+    padding-left: 10px;
+    
+}
+

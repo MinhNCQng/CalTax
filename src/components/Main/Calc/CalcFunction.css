@@ -1,0 +1,23 @@
+.calc-function-container{
+    margin-left: 120px;
+    padding-top: 10px;
+}
+
+.button{
+    font-weight: bold;
+    color:#654b24;
+    font-size: 13px;
+    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+    padding: 0.4em 1em;
+    outline: none;
+    border: 1px solid #cbc7bd;
+    border-radius: 6px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background: url("../../../assets/patterns/button_hover.png") 50% 50% repeat;
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
