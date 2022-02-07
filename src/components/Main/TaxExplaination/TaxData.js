@@ -26,7 +26,7 @@ const TaxData = [
     },
     {
         value:[
-            "Upper 10 million VND to 18 million VND	",
+            "Upper 10 million VND to 18 million VND",
             "15%",
             "0"
         ],
