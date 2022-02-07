@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/CalTax/static/css/main.15bf05c9.css",
+    "main.js": "/CalTax/static/js/main.7d4fba54.js",
+    "static/js/787.d879d2d8.chunk.js": "/CalTax/static/js/787.d879d2d8.chunk.js",
+    "static/media/button_hover.png": "/CalTax/static/media/button_hover.7ce491dce3f6a41cd9ae.png",
+    "static/media/region-modal-pattern.png": "/CalTax/static/media/region-modal-pattern.105a55c4e5997e8da205.png",
+    "index.html": "/CalTax/index.html",
+    "main.15bf05c9.css.map": "/CalTax/static/css/main.15bf05c9.css.map",
+    "main.7d4fba54.js.map": "/CalTax/static/js/main.7d4fba54.js.map",
+    "787.d879d2d8.chunk.js.map": "/CalTax/static/js/787.d879d2d8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.15bf05c9.css",
+    "static/js/main.7d4fba54.js"
+  ]
+}
