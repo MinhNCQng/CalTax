@@ -1,22 +1,21 @@
 import TextInputField from "../../InputField/TextInputField";
-import { useDispatch, useSelector } from "react-redux";
+
 import { useRef } from "react";
-import { familyDependActions } from "../../../store/redux-store";
+
 const FamilyDependInfo = props =>{
     
-    const { personalSalary,dependantSalary,numOfDepedant} = useSelector(state=> state.dependant)
+    const { personalSalary,dependantSalary,numOfDepedant} = props.infoData
     
     const personalSalaryRef = useRef()
         , dependantSalaryRef = useRef()
         , numOfDepedantRef   = useRef()
-    const dispatch = useDispatch()
     const handleFamilyDependInfoChange = ()=> {
         const newFamilyDependInfo = {
             personalSalary: personalSalaryRef.current.value ,
             dependantSalary: dependantSalaryRef.current.value ,
             numOfDepedant: numOfDepedantRef.current.value,
         }
-        dispatch(familyDependActions.updatefamilyDependInfo(newFamilyDependInfo))
+        props.handleChangeFamilyDependInfo(newFamilyDependInfo)
     }
     return (
         <div className="margin-top-20px">

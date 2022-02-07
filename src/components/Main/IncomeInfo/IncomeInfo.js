@@ -1,13 +1,12 @@
 import {  useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { incomeDataActions } from "../../../store/redux-store";
+
 import TextInputField from "../../InputField/TextInputField";
 
 const IncomeInfo = props => {
 
-    const incomeData = useSelector(storeState => storeState.income);
-    const dispatch = useDispatch()
-
+    const incomeData = props.infoData;
+    
+    
 
     const vndSalaryRef = useRef()
     const usdSalaryRef = useRef()
@@ -18,7 +17,7 @@ const IncomeInfo = props => {
             usdSalary:usdSalaryRef.current.value,
             exchangeUSDToVND: exchangeUSDToVNDRef.current.value
         }
-        dispatch(incomeDataActions.updateIncomInfo(newInfo))
+        props.handleChangeInComeInfo(newInfo)
     }
     return (
         <div className="margin-top-20px">

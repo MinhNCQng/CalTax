@@ -1,30 +1,31 @@
-import { useContext  } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { resultActions } from "../../../store/redux-store";
+import { useContext, useEffect  } from "react";
+
 import ExplainContext from "../../ExplainContext.js/ExplainContext";
 
 import "./CalcFunction.css"
 
 const CalcFunction = props =>{
 
-    const storeData = useSelector(state=>state)
-    const dispatch = useDispatch()
+
     const {handleSetExplanation} = useContext(ExplainContext)
 
     const handleGrosstoNetButtonCLicked = () =>{
-        const {grossSalary, netSalary, ...restInfo} = CalcGrossToNetFunction(storeData);
+        const {grossSalary, netSalary, ...restInfo} = CalcGrossToNetFunction(props.infoData);
         
         handleSetExplanation({grossSalary, netSalary, ...restInfo})
 
-        dispatch(resultActions.updateGrossAndNetSalary({grossSalary, netSalary}))
+        props.handleChangeResult({grossSalary, netSalary})
         
     }
     const handleNettoGrossButtonCLicked = () =>{
-        const {grossSalary, netSalary, ...restInfo} = CalcNetToGrossFunction(storeData);
+        const {grossSalary, netSalary, ...restInfo} = CalcNetToGrossFunction(props.infoData);
         handleSetExplanation({grossSalary, netSalary, ...restInfo})
-        dispatch(resultActions.updateGrossAndNetSalary({grossSalary, netSalary}))
+        props.handleChangeResult({grossSalary, netSalary})
 
     }
+    useEffect(()=>{
+        handleGrosstoNetButtonCLicked()  
+    },[])
     return (
         <div className="calc-function-container">
             <button className="button" onClick={handleGrosstoNetButtonCLicked}>

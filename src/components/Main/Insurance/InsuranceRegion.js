@@ -1,5 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
-import { insuranceActions } from "../../../store/redux-store";
+
 
 import infoIcon from "../../../assets/icons/get_info.png"
 import React, { useState } from "react";
@@ -7,12 +6,11 @@ import RegionModal from "../../Modal/RegionModal";
 import reactDom from "react-dom";
 const InsuranceRegion = props => {
     const [visibleRegionModel,setVisibleRegionModel] = useState(false);
-    const currentRegion = useSelector(store => store.insurance.region);
-    const dispatch = useDispatch()
+    const currentRegion = props.regionData
     const regions = ["I", "II", "III", "IV"]
 
     const handleRegionOptionChange = (value) =>{
-        dispatch(insuranceActions.updateInsuranceRegion(value))
+        props.handleChangeRegion(value)
     }
     
     const handleRegionModalCLicked = ()=>{

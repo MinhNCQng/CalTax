@@ -1,7 +1,7 @@
 import TextInputField from "../../InputField/TextInputField"
-import { useDispatch, useSelector } from "react-redux";
+
 import { useRef } from "react";
-import { insuranceActions } from "../../../store/redux-store";
+
 
 const InsuranceSelfInfo = props => {
 
@@ -9,8 +9,8 @@ const InsuranceSelfInfo = props => {
     const socialInputRef = useRef()
     const healthInputRef = useRef()
     const unemployedInputRef = useRef()
-    const {minWage,social,health,unemployed} = useSelector((store)=>{return store.insurance.selfInfo});
-    const dispatch = useDispatch()
+    const {minWage,social,health,unemployed} = props.selfData;
+
 
     const handleInsuranceSelfInfoChange = (event)=>{
         
@@ -20,7 +20,7 @@ const InsuranceSelfInfo = props => {
             health: healthInputRef.current.value,
             unemployed: unemployedInputRef.current.value,
         }
-        dispatch(insuranceActions.updateInsuranceSelfInfo(newInfo))
+        props.handleChangeSelfInfo(newInfo)
     }
     return (
         <div className="row-info">

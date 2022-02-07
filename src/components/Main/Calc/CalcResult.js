@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
 import "./CalcResult.css"
 const CalcResult = props =>{
-    const {grossSalary, netSalary} = useSelector(state=> state.resultCalc)
-    const exchangeRateString = useSelector(state => state.income.exchangeUSDToVND)
+    const {grossSalary, netSalary,exchangeRateString} = props.infoData
+    
     const exchangeRateNumber = Number(exchangeRateString)
     const commaGrossSalary = convertNumberToCommaNumberString(convertFloattoIntNumber(grossSalary))
     const commaNetSalary = convertNumberToCommaNumberString(convertFloattoIntNumber(netSalary))

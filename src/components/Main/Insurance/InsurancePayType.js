@@ -1,22 +1,24 @@
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { insuranceActions } from "../../../store/redux-store";
+
 import TextInputField from "../../InputField/TextInputField";
 
 const InsurancePayType = props => {
-    const {type, salary} = useSelector(state=>state.insurance.payType)
+    
+    const {type, salary} = props.payData
     const types = ["full wage","other"]
     const isDisable = type !== "other"
     
     const otherSalaryInputRef = useRef()
-    const dispatch = useDispatch()
+
     const handleInsuranceTypeChange = (value)=>{
         const newType = {
             type:value,
             salary: otherSalaryInputRef.current.value
         }
-        dispatch(insuranceActions.updateInsurancePayType(newType))
+        props.handleChangePayType(newType)
     }
+
+
     return (
         <div className="row-info">
             <span>Pay for </span>
