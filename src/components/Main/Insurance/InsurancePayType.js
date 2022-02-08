@@ -1,38 +1,46 @@
-import { useRef } from "react";
+import TextInputField2 from "../../InputField/TextInputField2";
 
-import TextInputField from "../../InputField/TextInputField";
+const InsurancePayType = (props) => {
+  const { type, salary } = props.payData;
+  const types = ["full wage", "other"];
+  const isDisable = type !== "other";
 
-const InsurancePayType = props => {
-    
-    const {type, salary} = props.payData
-    const types = ["full wage","other"]
-    const isDisable = type !== "other"
-    
-    const otherSalaryInputRef = useRef()
+  const { handleChangePayType, payData } = props;
 
-    const handleInsuranceTypeChange = (value)=>{
-        const newType = {
-            type:value,
-            salary: otherSalaryInputRef.current.value
-        }
-        props.handleChangePayType(newType)
-    }
+  const handleInsurancePayTypeChanged = (e) => {
+    const targetId = e.target.id;
+    handleChangePayType({
+      payType: { ...payData, [targetId]: e.target.value },
+    });
+  };
 
+  const handleInsurancePayOptionChanged = (value) => {
+    handleChangePayType({ payType: { ...payData, type: value } });
+  };
 
-    return (
-        <div className="row-info">
-            <span>Pay for </span>
-            {types.map((element,index)=>
-                <span key={index}  className="region-option" >
-                    <input type={"radio"} onChange={()=>handleInsuranceTypeChange(element)}  checked={element === type} />
-                    <label> {element} </label>
-                </span>
-            )}
-            <TextInputField ref={otherSalaryInputRef} handleChangeInputValue={()=>handleInsuranceTypeChange(type)} inputValue={salary} inputWidth={"70px"} trailText={" VND "} disable={isDisable} />
-            
+  return (
+    <div className="row-info">
+      <span>Pay for </span>
+      {types.map((element, index) => (
+        <span key={index} className="region-option">
+          <input
+            type={"radio"}
+            onChange={() => handleInsurancePayOptionChanged(element)}
+            checked={element === type}
+          />
+          <label> {element} </label>
+        </span>
+      ))}
+      <TextInputField2
+        id="salary"
+        onChange={handleInsurancePayTypeChanged}
+        value={salary}
+        inputWidth={"70px"}
+        suffix={" VND "}
+        disabled={isDisable}
+      />
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default InsurancePayType
+export default InsurancePayType;

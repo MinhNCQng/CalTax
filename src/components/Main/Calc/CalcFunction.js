@@ -43,15 +43,12 @@ const CalcFunction = props =>{
 
 function CalcGrossToNetFunction(storeData, customGrossSalary){
     
-    const grossSalary = (customGrossSalary|| (Number(storeData.income.vndSalary) + Number(storeData.income.usdSalary)*Number(storeData.income.exchangeUSDToVND)))
+    const grossSalary = calcGrossSalary(customGrossSalary, storeData)
 
     const salaryPayForServices = storeData.insurance.payType.type === "full wage" ? grossSalary : Number(storeData.insurance.payType.salary)
-    const socialExpensePercent = Number(storeData.insurance.selfInfo.social)/100
-    const socialExpense = salaryPayForServices*socialExpensePercent
-    const healthInsurancePercent = Number(storeData.insurance.selfInfo.health)/100
-    const healthInsuranceExpense = salaryPayForServices*healthInsurancePercent
-    const unemploymentInsurancePercent = Number(storeData.insurance.selfInfo.unemployed)/100
-    const unemploymentInsuranceExpense = salaryPayForServices*unemploymentInsurancePercent
+    const { socialExpense, socialExpensePercent } = calcSocialExpense(storeData, salaryPayForServices);
+    const { healthInsuranceExpense, healthInsurancePercent } = calcInsuranceHealth(storeData, salaryPayForServices);
+    const { unemploymentInsuranceExpense, unemploymentInsurancePercent } = calcEmploymentExpense(storeData, salaryPayForServices);
     
     
     const incomeBeforeTax = grossSalary - socialExpense - healthInsuranceExpense - unemploymentInsuranceExpense
@@ -66,14 +63,7 @@ function CalcGrossToNetFunction(storeData, customGrossSalary){
     const netSalary = incomeBeforeTax - personalIncomeTax
 
     // Calculate Company Pay
-    const socialInsuranceCompanyPayPercent = 0.255 - socialExpensePercent
-    const socialInsuranceCompanyPay = grossSalary*socialInsuranceCompanyPayPercent
-    
-    const healthInsuranceCompanyPayPercent = 0.045 - healthInsurancePercent
-    const healthInsuranceCompanyPay =  grossSalary*healthInsuranceCompanyPayPercent
-    const unemploymentInsuranceCompanyPayPercent = (0.02 - unemploymentInsurancePercent)
-    const unemploymentInsuranceCompanyPay = grossSalary*unemploymentInsuranceCompanyPayPercent
-    const companyPayTotal = grossSalary + socialInsuranceCompanyPay + healthInsuranceCompanyPay + unemploymentInsuranceCompanyPay
+    const { socialInsuranceCompanyPay, healthInsuranceCompanyPay, unemploymentInsuranceCompanyPay, companyPayTotal, socialInsuranceCompanyPayPercent, healthInsuranceCompanyPayPercent, unemploymentInsuranceCompanyPayPercent } = calcCompanyPayExpense(socialExpensePercent, grossSalary, healthInsurancePercent, unemploymentInsurancePercent);
     return {grossSalary,
             netSalary, 
             socialExpense,
@@ -98,15 +88,44 @@ function CalcGrossToNetFunction(storeData, customGrossSalary){
         }
 }
 
+function calcCompanyPayExpense(socialExpensePercent, grossSalary, healthInsurancePercent, unemploymentInsurancePercent) {
+    const socialInsuranceCompanyPayPercent = 0.255 - socialExpensePercent;
+    const socialInsuranceCompanyPay = grossSalary * socialInsuranceCompanyPayPercent;
+
+    const healthInsuranceCompanyPayPercent = 0.045 - healthInsurancePercent;
+    const healthInsuranceCompanyPay = grossSalary * healthInsuranceCompanyPayPercent;
+    const unemploymentInsuranceCompanyPayPercent = (0.02 - unemploymentInsurancePercent);
+    const unemploymentInsuranceCompanyPay = grossSalary * unemploymentInsuranceCompanyPayPercent;
+    const companyPayTotal = grossSalary + socialInsuranceCompanyPay + healthInsuranceCompanyPay + unemploymentInsuranceCompanyPay;
+    return { socialInsuranceCompanyPay, healthInsuranceCompanyPay, unemploymentInsuranceCompanyPay, companyPayTotal, socialInsuranceCompanyPayPercent, healthInsuranceCompanyPayPercent, unemploymentInsuranceCompanyPayPercent };
+}
+
+function calcEmploymentExpense(storeData, salaryPayForServices) {
+    const unemploymentInsurancePercent = Number(storeData.insurance.selfInfo.unemployed) / 100;
+    const unemploymentInsuranceExpense = salaryPayForServices * unemploymentInsurancePercent;
+    return { unemploymentInsuranceExpense, unemploymentInsurancePercent };
+}
+
+function calcInsuranceHealth(storeData, salaryPayForServices) {
+    const healthInsurancePercent = Number(storeData.insurance.selfInfo.health) / 100;
+    const healthInsuranceExpense = salaryPayForServices * healthInsurancePercent;
+    return { healthInsuranceExpense, healthInsurancePercent };
+}
+
+function calcSocialExpense(storeData, salaryPayForServices) {
+    const socialExpensePercent = Number(storeData.insurance.selfInfo.social) / 100;
+    const socialExpense = salaryPayForServices * socialExpensePercent;
+    return { socialExpense, socialExpensePercent };
+}
+
+function calcGrossSalary(customGrossSalary, storeData) {
+    return customGrossSalary || (Number(storeData.income.vndSalary) + Number(storeData.income.usdSalary) * Number(storeData.income.exchangeUSDToVND));
+}
+
 function CalcNetToGrossFunction (storeData){
-    const netSlary = Number(storeData.income.vndSalary) + Number(storeData.income.usdSalary)*Number(storeData.income.exchangeUSDToVND)
+    const netSlary = calcNetSalary(storeData)
     let leftBoundGrossSalary = netSlary
-    let rightBoundCoeff = 2;
-    let rightBoundGrossSalary = leftBoundGrossSalary*rightBoundCoeff
-    while (CalcGrossToNetFunction(storeData,rightBoundGrossSalary) < leftBoundGrossSalary){
-        rightBoundCoeff+=1
-    }
-    rightBoundGrossSalary = leftBoundGrossSalary*rightBoundCoeff
+    let rightBoundGrossSalary = findRightBoundSalary(leftBoundGrossSalary, storeData);
     while (true){
         let middleSalary = (leftBoundGrossSalary + rightBoundGrossSalary)/2
         let CalcResult = CalcGrossToNetFunction(storeData,middleSalary)
@@ -114,12 +133,22 @@ function CalcNetToGrossFunction (storeData){
         if (Math.floor(temp) === netSlary) {return {...CalcResult,grossSalary: Math.floor(middleSalary), netSalary:netSlary}}
         if (temp < netSlary) leftBoundGrossSalary = middleSalary
         else  rightBoundGrossSalary = middleSalary
-        
-        
-        
     } 
 
+}
 
+function findRightBoundSalary(leftBoundGrossSalary, storeData) {
+    let rightBoundCoeff = 2;
+    let rightBoundGrossSalary = leftBoundGrossSalary * rightBoundCoeff;
+    while (CalcGrossToNetFunction(storeData, rightBoundGrossSalary) < leftBoundGrossSalary) {
+        rightBoundCoeff += 1;
+    }
+    rightBoundGrossSalary = leftBoundGrossSalary * rightBoundCoeff;
+    return rightBoundGrossSalary;
+}
+
+function calcNetSalary(storeData) {
+    return Number(storeData.income.vndSalary) + Number(storeData.income.usdSalary) * Number(storeData.income.exchangeUSDToVND);
 }
 
 function getPersonalIncomeTax(salary){

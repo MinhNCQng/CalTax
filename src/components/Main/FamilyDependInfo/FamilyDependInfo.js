@@ -1,54 +1,49 @@
 import TextInputField from "../../InputField/TextInputField";
 
-import { useRef } from "react";
+import TextInputField2 from "../../InputField/TextInputField2";
 
-const FamilyDependInfo = props =>{
-    
-    const { personalSalary,dependantSalary,numOfDepedant} = props.infoData
-    
-    const personalSalaryRef = useRef()
-        , dependantSalaryRef = useRef()
-        , numOfDepedantRef   = useRef()
-    const handleFamilyDependInfoChange = ()=> {
-        const newFamilyDependInfo = {
-            personalSalary: personalSalaryRef.current.value ,
-            dependantSalary: dependantSalaryRef.current.value ,
-            numOfDepedant: numOfDepedantRef.current.value,
-        }
-        props.handleChangeFamilyDependInfo(newFamilyDependInfo)
-    }
-    return (
-        <div className="margin-top-20px">
-            <h1 className="group-label">Reduction based on family circumstances</h1>
-            <div className="row-info">
-                <TextInputField 
-                    labelText={"Personal: "}
-                    inputValue={personalSalary}
-                    ref={personalSalaryRef}
-                    handleChangeInputValue={handleFamilyDependInfoChange}
-                    inputWidth={"70px"}
-                    trailText={" VND"}
+const FamilyDependInfo = (props) => {
+  const { infoData, handleChangeFamilyDependInfo } = props;
+  const { personalSalary, dependantSalary, numOfDepedant } = infoData;
+  console.log(infoData);
+  const handleFamilyDependInfoChange = (e) => {
+    const targetId = e.target.id;
+    const targetValue = e.target.value;
+    handleChangeFamilyDependInfo({
+      ...infoData,
+      [targetId]: targetValue,
+    });
+  };
 
-                />
-                <TextInputField 
-                    labelText={"Dependant: "}
-                    inputValue={dependantSalary}
-                    ref={dependantSalaryRef}
-                    handleChangeInputValue={handleFamilyDependInfoChange}
-                    inputWidth={"70px"}
-                    trailText={" VND"}
-
-                />
-                <TextInputField 
-                    labelText={"Number of dependant: "}
-                    inputValue={numOfDepedant}
-                    ref={numOfDepedantRef}
-                    handleChangeInputValue={handleFamilyDependInfoChange}
-                    inputWidth={"40px"}
-
-                />
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="margin-top-20px">
+      <h1 className="group-label">Reduction based on family circumstances</h1>
+      <div className="row-info">
+        <TextInputField2
+          id={"personalSalary"}
+          prefix={"Personal: "}
+          value={personalSalary}
+          onChange={handleFamilyDependInfoChange}
+          inputWidth={"70px"}
+          suffix={" VND"}
+        />
+        <TextInputField2
+          id="dependantSalary"
+          prefix={"Dependant: "}
+          value={dependantSalary}
+          onChange={handleFamilyDependInfoChange}
+          inputWidth={"70px"}
+          suffix={" VND"}
+        />
+        <TextInputField2
+          id="numOfDepedant"
+          prefix={"Number of dependant: "}
+          value={numOfDepedant}
+          onChange={handleFamilyDependInfoChange}
+          inputWidth={"40px"}
+        />
+      </div>
+    </div>
+  );
+};
 export default FamilyDependInfo;

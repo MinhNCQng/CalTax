@@ -1,58 +1,48 @@
-import TextInputField from "../../InputField/TextInputField"
-
-import { useRef } from "react";
+import TextInputField2 from "../../InputField/TextInputField2";
 
 
 const InsuranceSelfInfo = props => {
 
-    const minWageInputRef = useRef()
-    const socialInputRef = useRef()
-    const healthInputRef = useRef()
-    const unemployedInputRef = useRef()
-    const {minWage,social,health,unemployed} = props.selfData;
 
+    const {selfData, handleChangeSelfInfo} = props
+    const {minWage,social,health,unemployed} = selfData;
 
-    const handleInsuranceSelfInfoChange = (event)=>{
-        
-        const newInfo = {
-            minWage: minWageInputRef.current.value,
-            social: socialInputRef.current.value,
-            health: healthInputRef.current.value,
-            unemployed: unemployedInputRef.current.value,
-        }
-        props.handleChangeSelfInfo(newInfo)
+    const handleInsuranceSelfInfoChange = e =>{
+        const targetId  = e.target.id
+        const targetValue = e.target.value
+        handleChangeSelfInfo({selfInfo:{...selfData, [targetId]: targetValue}})
     }
     return (
         <div className="row-info">
-            <TextInputField
-                ref={minWageInputRef}
-                labelText={"Minimum wage "}
+            <TextInputField2
+                id="minWage"
+                prefix={"Minimum wage "}
                 inputWidth={"70px"}
-                inputValue={minWage}
-                handleChangeInputValue={handleInsuranceSelfInfoChange} 
-                trailText={"VND"}
+                value={minWage}
+                onChange={handleInsuranceSelfInfoChange} 
+                suffix={"VND"}
                 />
-            <TextInputField
-                ref={socialInputRef} 
-                labelText={"Social "}
+            <TextInputField2
+                id="social"
+                prefix={"Social "}
                 inputWidth={"30px"}
-                inputValue={social}
-                handleChangeInputValue={handleInsuranceSelfInfoChange} 
-                trailText={" % "}/>
-            <TextInputField
-                ref={healthInputRef}
-                labelText={"Health "}
+                value={social}
+                onChange={handleInsuranceSelfInfoChange} 
+                suffix={" % "}/>
+            <TextInputField2
+                id="health"
+                prefix={"Health "}
                 inputWidth={"30px"}
-                inputValue={health}
-                handleChangeInputValue={handleInsuranceSelfInfoChange} 
-                trailText={" % "}/>
-            <TextInputField
-                ref={unemployedInputRef}
-                labelText={"Unemployed "}
+                value={health}
+                onChange={handleInsuranceSelfInfoChange} 
+                suffix={" % "}/>
+            <TextInputField2
+                id="unemployed"
+                prefix={"Unemployed "}
                 inputWidth={"30px"}
-                inputValue={unemployed}
-                handleChangeInputValue={handleInsuranceSelfInfoChange} 
-                trailText={" % "}/>
+                value={unemployed}
+                onChange={handleInsuranceSelfInfoChange} 
+                suffix={" % "}/>
         </div>
     )
 }

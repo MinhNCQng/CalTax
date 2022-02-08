@@ -1,46 +1,37 @@
-import {  useRef } from "react";
-
-import TextInputField from "../../InputField/TextInputField";
+import TextInputField2 from "../../InputField/TextInputField2";
 
 const IncomeInfo = props => {
 
-    const incomeData = props.infoData;
+    const {incomeData, handleChangeInComeInfo} = props;
     
-    
-
-    const vndSalaryRef = useRef()
-    const usdSalaryRef = useRef()
-    const exchangeUSDToVNDRef = useRef()
     const handleIncomInfoChange = (event) => {
-        const newInfo = {
-            vndSalary: vndSalaryRef.current.value,
-            usdSalary:usdSalaryRef.current.value,
-            exchangeUSDToVND: exchangeUSDToVNDRef.current.value
-        }
-        props.handleChangeInComeInfo(newInfo)
+        const targetId = event.target.id
+        
+        handleChangeInComeInfo({...incomeData,[targetId]: event.target.value})
     }
     return (
         <div className="margin-top-20px">
             <h1 className="group-label">Income</h1>
             <div className="row-info">
-                <TextInputField 
-                    ref={vndSalaryRef} 
-                    labelText={"VND: "} 
+                <TextInputField2
+                    prefix={"VND: "} 
                     inputWidth={"100px"} 
-                    inputValue={incomeData.vndSalary} 
-                    handleChangeInputValue={handleIncomInfoChange}/>
-                <TextInputField 
-                    ref={usdSalaryRef} labelText={"USD: "} 
+                    id="vndSalary"
+                    value={incomeData.vndSalary} 
+                    onChange={handleIncomInfoChange}/>
+                <TextInputField2 
+                    id="usdSalary"
+                    prefix={"USD: "} 
                     inputWidth={"60px"} 
-                    inputValue={incomeData.usdSalary} 
-                    handleChangeInputValue={handleIncomInfoChange}/>
-                <TextInputField 
-                    ref={exchangeUSDToVNDRef} 
-                    labelText={"Exchange rate: 1 USD = "} 
+                    value={incomeData.usdSalary} 
+                    onChange={handleIncomInfoChange}/>
+                <TextInputField2 
+                    id="exchangeUSDToVND"
+                    prefix={"Exchange rate: 1 USD = "} 
                     inputWidth={"60px"} 
-                    inputValue={incomeData.exchangeUSDToVND} 
-                    handleChangeInputValue={handleIncomInfoChange}
-                    trailText={" VND"}/>
+                    value={incomeData.exchangeUSDToVND} 
+                    onChange={handleIncomInfoChange}
+                    suffix={" VND"}/>
             </div>
         </div>
     )

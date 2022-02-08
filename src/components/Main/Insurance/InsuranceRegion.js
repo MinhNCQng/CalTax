@@ -10,7 +10,7 @@ const InsuranceRegion = props => {
     const regions = ["I", "II", "III", "IV"]
 
     const handleRegionOptionChange = (value) =>{
-        props.handleChangeRegion(value)
+        props.handleChangeRegion({region:value})
     }
     
     const handleRegionModalCLicked = ()=>{

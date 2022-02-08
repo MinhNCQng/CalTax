@@ -1,4 +1,3 @@
-import { useState } from "react";
 import CalcFunction from "../Calc/CalcFunction";
 import CalcResult from "../Calc/CalcResult";
 import FamilyDependInfo from "../FamilyDependInfo/FamilyDependInfo";
@@ -7,65 +6,28 @@ import InsuranceInfo from "../Insurance/InsuranceInfo";
 
 import "./InFoSalaryForm.css";
 
-const initalSalaryInfo = {
-  income: {
-    vndSalary: "10000000",
-    usdSalary: "0",
-    exchangeUSDToVND: "23300",
-  },
-  insurance: {
-    selfInfo: {
-      minWage: "1490000",
-      social: "8",
-      health: "1.5",
-      unemployed: "1",
-    },
-    region: "I",
-    payType: {
-      type: "full wage",
-      salary: "0",
-    },
-  },
-  dependant: {
-    personalSalary: "11000000",
-    dependantSalary: "4400000",
-    numOfDepedant: "0",
-  },
-  resultCalc: {
-    grossSalary: 0,
-    netSalary: 0,
-  },
-};
+
 
 const InfoSalaryForm = (props) => {
-  const [salaryInfo, setSalaryInfo] = useState(initalSalaryInfo);
-
+  const {salaryInfo, updateSalaryInfo} = props
   const handleChangeInComeInfo = (newValues) => {
-    setSalaryInfo((prev) => {
-      return { ...prev, income: newValues };
-    });
+    updateSalaryInfo({ income: newValues });
   };
   const handleChangeInsuranceInfo = (newValues) => {
-    setSalaryInfo((prev) => {
-      return { ...prev, insurance: newValues };
-    });
+    updateSalaryInfo({ insurance: newValues });
   };
   const handleChangeFamilyDependInfo = (newValues) => {
-    setSalaryInfo((prev) => {
-      return { ...prev, dependant: newValues };
-    });
+    updateSalaryInfo({ dependant: newValues });
   };
 
-  const handleChangeResult = (newValues) =>{
-    setSalaryInfo((prev) => {
-      return { ...prev, resultCalc: newValues };
-    });
-  }
+  const handleChangeResult = (newValues) => {
+    updateSalaryInfo({ resultCalc: newValues });
+  };
   return (
     <div className="salary-info">
       <IncomeInfo
         handleChangeInComeInfo={handleChangeInComeInfo}
-        infoData={salaryInfo.income}
+        incomeData={salaryInfo.income}
       />
       <InsuranceInfo  handleChangeInsuranceInfo = {handleChangeInsuranceInfo} infoData={salaryInfo.insurance}/>
       <FamilyDependInfo  handleChangeFamilyDependInfo = {handleChangeFamilyDependInfo} infoData= {salaryInfo.dependant}/>
