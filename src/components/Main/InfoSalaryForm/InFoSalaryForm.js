@@ -18,10 +18,6 @@ const InfoSalaryForm = (props) => {
   const handleChangeFamilyDependInfo = (newValues) => {
     updateSalaryInfo({ dependant: newValues });
   };
-
-  const handleChangeResult = (newValues) => {
-    updateSalaryInfo({ resultCalc: newValues });
-  };
   return (
     <div className="salary-info">
       <Form>
@@ -39,17 +35,10 @@ const InfoSalaryForm = (props) => {
         />
 
         <CalcFunction
-          handleChangeResult={handleChangeResult}
           infoData={salaryInfo}
           handleSetExplanation = {handleSetExplanation}
         />
       </Form>
-      <CalcResult
-        infoData={{
-          ...salaryInfo.resultCalc,
-          exchangeRateString: salaryInfo.income.exchangeUSDToVND,
-        }}
-      />
     </div>
   );
 };

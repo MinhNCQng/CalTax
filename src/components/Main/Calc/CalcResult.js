@@ -1,20 +1,23 @@
 import "./CalcResult.css"
-import { changeVNDtoUSDSalary, convertFloattoIntNumber, convertNumberToCommaNumberString } from "./CalcUlity"
+import { changeVNDtoUSDSalary, convertCommaNumberStringToNumberString, convertFloattoIntNumber, convertNumberToCommaNumberString } from "./CalcUlity"
 const CalcResult = props =>{
-    const {grossSalary, netSalary,exchangeRateString} = props.infoData
+    const {explainData} = props
+    const {grossSalary, netSalary,exchangeRateString} = explainData
     
-    const exchangeRateNumber = Number(exchangeRateString)
-    const commaGrossSalary = convertNumberToCommaNumberString(convertFloattoIntNumber(grossSalary))
-    const commaNetSalary = convertNumberToCommaNumberString(convertFloattoIntNumber(netSalary))
-    const grossUSDSalary = changeVNDtoUSDSalary(grossSalary,exchangeRateNumber)
-    const netUSDSalary = changeVNDtoUSDSalary(netSalary,exchangeRateNumber)
+    const exchangeRateNumber = Number(convertCommaNumberStringToNumberString(exchangeRateString))
+    
 
+    const grossDollarSalaryString = convertCommaNumberStringToNumberString(grossSalary)
+    const grossDollarSalary = changeVNDtoUSDSalary(+grossDollarSalaryString,exchangeRateNumber)
+
+    const netDollarSalaryString = convertCommaNumberStringToNumberString(netSalary)
+    const netDollarSalary = changeVNDtoUSDSalary(+netDollarSalaryString,exchangeRateNumber)
 
     return (
         <div className="calc-result text-align-right">
-            <b>GROSS</b> : {commaGrossSalary} (VND) ≈ {grossUSDSalary} (USD)
+            <b>GROSS</b> : {grossSalary} (VND) ≈ {grossDollarSalary} (USD)
             <br/>
-            <b>NET</b> : {commaNetSalary} ≈ {netUSDSalary} (USD)
+            <b>NET</b> : {netSalary} ≈ {netDollarSalary}(USD)
         </div>
     )
 

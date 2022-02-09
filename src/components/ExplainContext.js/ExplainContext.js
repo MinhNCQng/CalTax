@@ -1,11 +1,12 @@
 
 
-import { createContext } from "react";
+
 
 
 const defaultExplainValue = {
     grossSalary:"0", 
     netSalary:"0", 
+    exchangeRateString:"23300",
     socialExpense:"0",
     socialExpensePercent:"",
     healthInsuranceExpense:"0", 
@@ -29,7 +30,7 @@ const defaultExplainValue = {
     unemploymentInsuranceCompanyPayPercent:"",
 
 }
-const ExplainContext = createContext()
 
-export default ExplainContext;
+
+
 export {defaultExplainValue}

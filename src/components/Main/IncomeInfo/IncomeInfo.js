@@ -17,7 +17,6 @@ const IncomeInfo = (props) => {
             <Input
               prefix="VND: "
               style={{ width: "130px" }}
-              defaultValue={10000000}
               value={incomeData.vndSalary}
               id="vndSalary"
               onChange={handleIncomInfoChange}
@@ -25,7 +24,6 @@ const IncomeInfo = (props) => {
             <Input
               prefix="USD: "
               style={{ width: "90px" }}
-              defaultValue={10000000}
               value={incomeData.usdSalary}
               id="usdSalary"
               onChange={handleIncomInfoChange}
@@ -33,7 +31,6 @@ const IncomeInfo = (props) => {
             <Input
               prefix="Exchange rate: 1 USD = "
               style={{ width: "300px" }}
-              defaultValue={10000000}
               value={incomeData.exchangeUSDToVND}
               id="exchangeUSDToVND"
               onChange={handleIncomInfoChange}

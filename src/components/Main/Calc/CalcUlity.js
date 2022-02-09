@@ -9,8 +9,12 @@ function convertNumberToCommaNumberString(number){
     return commaNumberString
 }
 
+function convertCommaNumberStringToNumberString(commaNumber){
+    return commaNumber.replaceAll(",","")
+}
+
 function convertFloattoIntNumber(floatNumber){
     return parseInt(floatNumber)
 }
 
-export {convertNumberToCommaNumberString,convertFloattoIntNumber, changeVNDtoUSDSalary }
+export {convertNumberToCommaNumberString,convertFloattoIntNumber, changeVNDtoUSDSalary, convertCommaNumberStringToNumberString }

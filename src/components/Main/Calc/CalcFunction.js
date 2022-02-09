@@ -14,15 +14,13 @@ const CalcFunction = (props) => {
     );
 
     handleSetExplanation({ grossSalary, netSalary, ...restInfo });
-
-    props.handleChangeResult({ grossSalary, netSalary });
   };
   const handleNettoGrossButtonCLicked = () => {
     const { grossSalary, netSalary, ...restInfo } = CalcNetToGrossFunction(
       infoData
     );
+
     handleSetExplanation({ grossSalary, netSalary, ...restInfo });
-    props.handleChangeResult({ grossSalary, netSalary });
   };
   useEffect(() => {
     handleGrosstoNetButtonCLicked();
@@ -44,6 +42,7 @@ const CalcFunction = (props) => {
 };
 
 function CalcGrossToNetFunction(storeData, customGrossSalary) {
+  const exchangeRateString = storeData.income.exchangeUSDToVND;
   const grossSalary = calcGrossSalary(customGrossSalary, storeData);
 
   const salaryPayForServices =
@@ -94,6 +93,7 @@ function CalcGrossToNetFunction(storeData, customGrossSalary) {
   return {
     grossSalary,
     netSalary,
+    exchangeRateString,
     socialExpense,
     socialExpensePercent,
     healthInsurancePercent,
