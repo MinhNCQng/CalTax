@@ -1,7 +1,16 @@
-function CalcGrossSalary(storeData){
-    return (Number(storeData.income.vndSalary) + Number(storeData.income.usdSalary)*Number(storeData.income.exchangeUSDToVND))
+function changeVNDtoUSDSalary(VNDSalary,rateChange){
+    
+    return (VNDSalary/rateChange).toFixed(2) || 0;
 }
 
-function CalcSocialExpense(storeData){
+function convertNumberToCommaNumberString(number){
+    const commaNumberString =  number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+    return commaNumberString
 }
+
+function convertFloattoIntNumber(floatNumber){
+    return parseInt(floatNumber)
+}
+
+export {convertNumberToCommaNumberString,convertFloattoIntNumber, changeVNDtoUSDSalary }

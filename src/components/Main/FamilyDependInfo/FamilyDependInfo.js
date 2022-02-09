@@ -1,11 +1,8 @@
-import TextInputField from "../../InputField/TextInputField";
-
-import TextInputField2 from "../../InputField/TextInputField2";
-
+import { Input, Space } from "antd";
 const FamilyDependInfo = (props) => {
   const { infoData, handleChangeFamilyDependInfo } = props;
   const { personalSalary, dependantSalary, numOfDepedant } = infoData;
-  console.log(infoData);
+
   const handleFamilyDependInfoChange = (e) => {
     const targetId = e.target.id;
     const targetValue = e.target.value;
@@ -19,29 +16,33 @@ const FamilyDependInfo = (props) => {
     <div className="margin-top-20px">
       <h1 className="group-label">Reduction based on family circumstances</h1>
       <div className="row-info">
-        <TextInputField2
-          id={"personalSalary"}
-          prefix={"Personal: "}
-          value={personalSalary}
-          onChange={handleFamilyDependInfoChange}
-          inputWidth={"70px"}
-          suffix={" VND"}
-        />
-        <TextInputField2
-          id="dependantSalary"
-          prefix={"Dependant: "}
-          value={dependantSalary}
-          onChange={handleFamilyDependInfoChange}
-          inputWidth={"70px"}
-          suffix={" VND"}
-        />
-        <TextInputField2
-          id="numOfDepedant"
-          prefix={"Number of dependant: "}
-          value={numOfDepedant}
-          onChange={handleFamilyDependInfoChange}
-          inputWidth={"40px"}
-        />
+        <Space>
+          <Input
+            id="personalSalary"
+            prefix="Personal: "
+            suffix={"VND"}
+            style={{ width: "130px" }}
+            onChange={handleFamilyDependInfoChange}
+            value={personalSalary}
+          />
+
+          <Input
+            id="dependantSalary"
+            prefix="Dependant: "
+            suffix={"VND"}
+            style={{ width: "130px" }}
+            onChange={handleFamilyDependInfoChange}
+            value={dependantSalary}
+          />
+
+          <Input
+            id="dependantSalary"
+            prefix="Number of dependant: "
+            style={{ width: "180px" }}
+            onChange={handleFamilyDependInfoChange}
+            value={numOfDepedant}
+          />
+        </Space>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import TextInputField2 from "../../InputField/TextInputField2";
+import { Input, Space } from "antd";
 
 
 const InsuranceSelfInfo = props => {
@@ -14,35 +14,44 @@ const InsuranceSelfInfo = props => {
     }
     return (
         <div className="row-info">
-            <TextInputField2
-                id="minWage"
-                prefix={"Minimum wage "}
-                inputWidth={"70px"}
-                value={minWage}
-                onChange={handleInsuranceSelfInfoChange} 
-                suffix={"VND"}
+            <Space>
+                <Input
+                    id="minWage"
+                    prefix="Minimum wage: "
+                    style={{ width: "230px" }}
+                    value={minWage}
+                    onChange={handleInsuranceSelfInfoChange}
+                    suffix="VND"
                 />
-            <TextInputField2
-                id="social"
-                prefix={"Social "}
-                inputWidth={"30px"}
-                value={social}
-                onChange={handleInsuranceSelfInfoChange} 
-                suffix={" % "}/>
-            <TextInputField2
-                id="health"
-                prefix={"Health "}
-                inputWidth={"30px"}
-                value={health}
-                onChange={handleInsuranceSelfInfoChange} 
-                suffix={" % "}/>
-            <TextInputField2
-                id="unemployed"
-                prefix={"Unemployed "}
-                inputWidth={"30px"}
-                value={unemployed}
-                onChange={handleInsuranceSelfInfoChange} 
-                suffix={" % "}/>
+                <Input
+                    id="social"
+                    prefix="Social: "
+                    style={{ width: "100px" }}
+                    
+                    value={social}
+                    onChange={handleInsuranceSelfInfoChange}
+                    suffix=" % "
+                />
+                <Input
+                    id="health"
+                    prefix="Health: "
+                    style={{ width: "110px" }}
+                    value={health}
+                    onChange={handleInsuranceSelfInfoChange}
+                    suffix=" % "
+                />
+                <Input
+                    id="unemployed"
+                    prefix="Unemployed: "
+                    style={{ width: "150px" }}
+                    value={unemployed}
+                    onChange={handleInsuranceSelfInfoChange}
+                    suffix=" %"
+                />
+            </Space>
+
+            
+            
         </div>
     )
 }

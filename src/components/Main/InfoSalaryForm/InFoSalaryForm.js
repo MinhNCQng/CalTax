@@ -1,3 +1,4 @@
+import { Form } from "antd";
 import CalcFunction from "../Calc/CalcFunction";
 import CalcResult from "../Calc/CalcResult";
 import FamilyDependInfo from "../FamilyDependInfo/FamilyDependInfo";
@@ -6,10 +7,8 @@ import InsuranceInfo from "../Insurance/InsuranceInfo";
 
 import "./InFoSalaryForm.css";
 
-
-
 const InfoSalaryForm = (props) => {
-  const {salaryInfo, updateSalaryInfo} = props
+  const { salaryInfo, updateSalaryInfo, handleSetExplanation } = props;
   const handleChangeInComeInfo = (newValues) => {
     updateSalaryInfo({ income: newValues });
   };
@@ -25,14 +24,32 @@ const InfoSalaryForm = (props) => {
   };
   return (
     <div className="salary-info">
-      <IncomeInfo
-        handleChangeInComeInfo={handleChangeInComeInfo}
-        incomeData={salaryInfo.income}
+      <Form>
+        <IncomeInfo
+          handleChangeInComeInfo={handleChangeInComeInfo}
+          incomeData={salaryInfo.income}
+        />
+        <InsuranceInfo
+          handleChangeInsuranceInfo={handleChangeInsuranceInfo}
+          infoData={salaryInfo.insurance}
+        />
+        <FamilyDependInfo
+          handleChangeFamilyDependInfo={handleChangeFamilyDependInfo}
+          infoData={salaryInfo.dependant}
+        />
+
+        <CalcFunction
+          handleChangeResult={handleChangeResult}
+          infoData={salaryInfo}
+          handleSetExplanation = {handleSetExplanation}
+        />
+      </Form>
+      <CalcResult
+        infoData={{
+          ...salaryInfo.resultCalc,
+          exchangeRateString: salaryInfo.income.exchangeUSDToVND,
+        }}
       />
-      <InsuranceInfo  handleChangeInsuranceInfo = {handleChangeInsuranceInfo} infoData={salaryInfo.insurance}/>
-      <FamilyDependInfo  handleChangeFamilyDependInfo = {handleChangeFamilyDependInfo} infoData= {salaryInfo.dependant}/>
-      <CalcFunction handleChangeResult = {handleChangeResult} infoData = {salaryInfo} />
-      <CalcResult infoData = {{...salaryInfo.resultCalc, exchangeRateString:salaryInfo.income.exchangeUSDToVND }}/>
     </div>
   );
 };

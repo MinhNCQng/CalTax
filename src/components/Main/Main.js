@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { defaultExplainValue } from "../ExplainContext.js/ExplainContext";
+import { convertFloattoIntNumber, convertNumberToCommaNumberString } from "./Calc/CalcUlity";
+
 import DetailExplanationTable from "./DetailExplanationTable.js/DetailExplanationTable";
 
 import InfoSalaryForm from "./InfoSalaryForm/InFoSalaryForm";
@@ -37,7 +40,22 @@ const initalSalaryInfo = {
 
 const Main = (props) => {
   const [salaryInfo, setSalaryInfo] = useState(initalSalaryInfo);
-  
+  const [explaination,setExplaination] = useState(defaultExplainValue)
+
+  const handleSetExplanation = (resultObject) => {
+        
+    Object.keys(resultObject).forEach((element)=>{
+        if (element === "detailPersonalIncomeTax") {
+            resultObject[element] = resultObject[element].map(detailIncomeTaxElement =>{
+                return convertNumberToCommaNumberString(convertFloattoIntNumber(detailIncomeTaxElement))
+            })
+            return;
+        }
+        if (element.includes("Percent")) return
+        resultObject[element] = convertNumberToCommaNumberString(convertFloattoIntNumber(resultObject[element]))
+    })
+    setExplaination(resultObject)
+}
   const updateSalaryInfo = (fieldUpdate) => {
     setSalaryInfo((prev) => {
       return { ...prev, ...fieldUpdate };
@@ -47,8 +65,8 @@ const Main = (props) => {
   return (
     <main className="main-container">
       <div className="main-wrapper ">
-        <InfoSalaryForm  salaryInfo = {salaryInfo} updateSalaryInfo ={updateSalaryInfo}/>
-        <DetailExplanationTable />
+        <InfoSalaryForm  salaryInfo = {salaryInfo} updateSalaryInfo ={updateSalaryInfo} handleSetExplanation={handleSetExplanation}/>
+        <DetailExplanationTable explaination={explaination} />
       </div>
     </main>
   );

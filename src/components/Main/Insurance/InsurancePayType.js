@@ -1,4 +1,4 @@
-import TextInputField2 from "../../InputField/TextInputField2";
+import { Input, Radio } from "antd";
 
 const InsurancePayType = (props) => {
   const { type, salary } = props.payData;
@@ -14,30 +14,27 @@ const InsurancePayType = (props) => {
     });
   };
 
-  const handleInsurancePayOptionChanged = (value) => {
+  const handleInsurancePayOptionChanged = (e) => {
+    const value = e.target.value
     handleChangePayType({ payType: { ...payData, type: value } });
   };
 
   return (
     <div className="row-info">
       <span>Pay for </span>
+      <Radio.Group value={type} onChange = {handleInsurancePayOptionChanged}>
       {types.map((element, index) => (
-        <span key={index} className="region-option">
-          <input
-            type={"radio"}
-            onChange={() => handleInsurancePayOptionChanged(element)}
-            checked={element === type}
-          />
-          <label> {element} </label>
-        </span>
+        <Radio key={index} value={element}>{element}</Radio>
       ))}
-      <TextInputField2
+      </Radio.Group>
+      <Input
         id="salary"
+        suffix={"VND"}
+        style={{ width: "130px" }}
+        defaultValue={0}
         onChange={handleInsurancePayTypeChanged}
-        value={salary}
-        inputWidth={"70px"}
-        suffix={" VND "}
         disabled={isDisable}
+        value={salary}
       />
     </div>
   );

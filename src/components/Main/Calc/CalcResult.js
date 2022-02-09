@@ -1,4 +1,5 @@
 import "./CalcResult.css"
+import { changeVNDtoUSDSalary, convertFloattoIntNumber, convertNumberToCommaNumberString } from "./CalcUlity"
 const CalcResult = props =>{
     const {grossSalary, netSalary,exchangeRateString} = props.infoData
     
@@ -19,20 +20,5 @@ const CalcResult = props =>{
 
 }
 
-function changeVNDtoUSDSalary(VNDSalary,rateChange){
-    
-    return (VNDSalary/rateChange).toFixed(2) || 0;
-}
 
-function convertNumberToCommaNumberString(number){
-    const commaNumberString =  number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    return commaNumberString
-}
-
-function convertFloattoIntNumber(floatNumber){
-    return parseInt(floatNumber)
-}
-
-export {convertNumberToCommaNumberString,convertFloattoIntNumber }
 export default CalcResult;
