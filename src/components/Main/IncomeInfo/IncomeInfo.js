@@ -1,43 +1,42 @@
-import {  Input,  Space } from "antd";
-
+import {  Form, Input, Space } from "antd";
 
 const IncomeInfo = (props) => {
-  const { incomeData, handleChangeInComeInfo } = props;
 
-  const handleIncomInfoChange = (event) => {
-    const targetId = event.target.id;
 
-    handleChangeInComeInfo({ ...incomeData, [targetId]: event.target.value });
-  };
+  
   return (
-    <div className="margin-top-20px">
-      <h1 className="group-label">Income</h1>
-      <div className="row-info">
-          <Space size={"small"}>
-            <Input
-              prefix="VND: "
-              style={{ width: "130px" }}
-              value={incomeData.vndSalary}
-              id="vndSalary"
-              onChange={handleIncomInfoChange}
-            />
-            <Input
-              prefix="USD: "
-              style={{ width: "90px" }}
-              value={incomeData.usdSalary}
-              id="usdSalary"
-              onChange={handleIncomInfoChange}
-            />
-            <Input
-              prefix="Exchange rate: 1 USD = "
-              style={{ width: "300px" }}
-              value={incomeData.exchangeUSDToVND}
-              id="exchangeUSDToVND"
-              onChange={handleIncomInfoChange}
-              suffix=" VND"
-            />
-          </Space>
-      </div>
+    <div>
+      <h1 className="group-label">Salary</h1>
+      <Space size={"small"}>
+        <Form.Item label="VND" name={['income','vndSalary']}>
+          <Input
+            style={{ width: "100px" }}
+            
+            id="vndSalary"
+            
+            className="margin-right-10px"
+          />
+        </Form.Item>
+
+        <Form.Item label="USD: " name={['income','usdSalary']}>
+          <Input
+            style={{ width: "90px" }}
+            
+            id="usdSalary"
+            
+          />
+        </Form.Item>
+
+        <Form.Item label="Exchange rate: 1 USD" name={['income','exchangeUSDToVND']}>
+          <Input
+            style={{ width: "130px" }}
+            
+            id="exchangeUSDToVND"
+            
+            suffix=" VND"
+          />
+        </Form.Item>
+      </Space>
     </div>
   );
 };

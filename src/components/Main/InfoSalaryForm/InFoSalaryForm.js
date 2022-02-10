@@ -7,31 +7,26 @@ import InsuranceInfo from "../Insurance/InsuranceInfo";
 
 import "./InFoSalaryForm.css";
 
+
+
 const InfoSalaryForm = (props) => {
-  const { salaryInfo, updateSalaryInfo, handleSetExplanation } = props;
-  const handleChangeInComeInfo = (newValues) => {
-    updateSalaryInfo({ income: newValues });
-  };
-  const handleChangeInsuranceInfo = (newValues) => {
-    updateSalaryInfo({ insurance: newValues });
-  };
-  const handleChangeFamilyDependInfo = (newValues) => {
-    updateSalaryInfo({ dependant: newValues });
-  };
+  const { salaryInfo, handleSetExplanation , setSalaryInfo} = props;
+  
+  const [form] = Form.useForm()
+  const onFormChange = ()=>{
+    setSalaryInfo(form.getFieldsValue())
+  }
   return (
     <div className="salary-info">
-      <Form>
+      <Form form={form} layout="inline" onChange={onFormChange} initialValues={salaryInfo}>
         <IncomeInfo
-          handleChangeInComeInfo={handleChangeInComeInfo}
-          incomeData={salaryInfo.income}
+         
         />
         <InsuranceInfo
-          handleChangeInsuranceInfo={handleChangeInsuranceInfo}
           infoData={salaryInfo.insurance}
         />
         <FamilyDependInfo
-          handleChangeFamilyDependInfo={handleChangeFamilyDependInfo}
-          infoData={salaryInfo.dependant}
+         
         />
 
         <CalcFunction

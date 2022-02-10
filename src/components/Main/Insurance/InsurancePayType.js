@@ -1,42 +1,51 @@
-import { Input, Radio } from "antd";
+import { Col, Input, Radio, Row } from "antd";
+import { Form } from "antd";
 
 const InsurancePayType = (props) => {
-  const { type, salary } = props.payData;
+  const { type } = props.payData;
   const types = ["full wage", "other"];
   const isDisable = type !== "other";
 
-  const { handleChangePayType, payData } = props;
 
-  const handleInsurancePayTypeChanged = (e) => {
-    const targetId = e.target.id;
-    handleChangePayType({
-      payType: { ...payData, [targetId]: e.target.value },
-    });
-  };
 
-  const handleInsurancePayOptionChanged = (e) => {
-    const value = e.target.value
-    handleChangePayType({ payType: { ...payData, type: value } });
-  };
 
   return (
-    <div className="row-info">
-      <span>Pay for </span>
-      <Radio.Group value={type} onChange = {handleInsurancePayOptionChanged}>
-      {types.map((element, index) => (
-        <Radio key={index} value={element}>{element}</Radio>
-      ))}
-      </Radio.Group>
-      <Input
-        id="salary"
-        suffix={"VND"}
-        style={{ width: "130px" }}
-        defaultValue={0}
-        onChange={handleInsurancePayTypeChanged}
-        disabled={isDisable}
-        value={salary}
-      />
-    </div>
+    <Row className="row-info" gutter={8}>
+      <Input.Group compact>
+        <Col>
+          <Form.Item>
+            <span>Pay for </span>
+          </Form.Item>
+        </Col>
+
+        <Col>
+          <Form.Item name={['insurance','payType','type']}>
+            <Radio.Group
+              
+              
+            >
+              {types.map((element, index) => (
+                <Radio key={index} value={element}>
+                  {element}
+                </Radio>
+              ))}
+            </Radio.Group>
+          </Form.Item>
+        </Col>
+        <Col>
+          <Form.Item name={['insurance','payType','salary']}>
+            <Input
+              id="salary"
+              suffix={"VND"}
+              style={{ width: "130px" }}
+              
+              disabled={isDisable}
+              
+            />
+          </Form.Item>
+        </Col>
+      </Input.Group>
+    </Row>
   );
 };
 

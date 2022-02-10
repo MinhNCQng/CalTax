@@ -1,0 +1,7 @@
+.flex {
+    display: flex !important;
+    
+}
+.flex-row{
+    flex-direction: row !important; 
+}

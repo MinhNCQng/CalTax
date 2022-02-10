@@ -63,6 +63,7 @@ function CalcGrossToNetFunction(storeData, customGrossSalary) {
     socialExpense -
     healthInsuranceExpense -
     unemploymentInsuranceExpense;
+    
   const personalReduction = Number(storeData.dependant.personalSalary);
   const dependantReduction =
     Number(storeData.dependant.dependantSalary) *

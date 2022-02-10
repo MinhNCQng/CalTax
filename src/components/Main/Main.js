@@ -65,18 +65,14 @@ const Main = (props) => {
     setExplaination(resultObject);
   };
 
-  const updateSalaryInfo = (fieldUpdate) => {
-    setSalaryInfo((prev) => {
-      return { ...prev, ...fieldUpdate };
-    });
-  };
+
 
   return (
     <main className="main-container">
       <div className="main-wrapper ">
         <InfoSalaryForm
+          setSalaryInfo={setSalaryInfo}
           salaryInfo={salaryInfo}
-          updateSalaryInfo={updateSalaryInfo}
           handleSetExplanation={handleSetExplanation}
         />
         <DetailExplanationTable explaination={explaination} />

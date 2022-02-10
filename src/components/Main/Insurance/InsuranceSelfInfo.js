@@ -1,59 +1,55 @@
-import { Input, Space } from "antd";
+import { Form, Input, Row, Space } from "antd";
+
+const InsuranceSelfInfo = (props) => {
+
+ 
 
 
-const InsuranceSelfInfo = props => {
+  return (
+    <div className="row-info">
+      <Space size={"small"}>
+        <Form.Item label="Minimum wage: " name={['insurance','selfInfo','minWage']}>
+          <Input
+            id="minWage"
+            
+            style={{ width: "150px" }}
 
-
-    const {selfData, handleChangeSelfInfo} = props
-    const {minWage,social,health,unemployed} = selfData;
-
-    const handleInsuranceSelfInfoChange = e =>{
-        const targetId  = e.target.id
-        const targetValue = e.target.value
-        handleChangeSelfInfo({selfInfo:{...selfData, [targetId]: targetValue}})
-    }
-    return (
-        <div className="row-info">
-            <Space>
-                <Input
-                    id="minWage"
-                    prefix="Minimum wage: "
-                    style={{ width: "230px" }}
-                    value={minWage}
-                    onChange={handleInsuranceSelfInfoChange}
-                    suffix="VND"
-                />
-                <Input
-                    id="social"
-                    prefix="Social: "
-                    style={{ width: "100px" }}
-                    
-                    value={social}
-                    onChange={handleInsuranceSelfInfoChange}
-                    suffix=" % "
-                />
-                <Input
-                    id="health"
-                    prefix="Health: "
-                    style={{ width: "110px" }}
-                    value={health}
-                    onChange={handleInsuranceSelfInfoChange}
-                    suffix=" % "
-                />
-                <Input
-                    id="unemployed"
-                    prefix="Unemployed: "
-                    style={{ width: "150px" }}
-                    value={unemployed}
-                    onChange={handleInsuranceSelfInfoChange}
-                    suffix=" %"
-                />
-            </Space>
+           
+            suffix="VND"
+          />
+        </Form.Item>
+        <Form.Item label="Social" name={['insurance','selfInfo','social']} >
+          <Input
+            id="social"
+            
+            style={{ width: "60px" }}
 
             
+            suffix=" % "
+          />
+        </Form.Item>
+        <Form.Item label ="Health: " name={['insurance','selfInfo','health']} >
+          <Input
+            id="health"
+        
+            style={{ width: "60px" }}
+   
             
-        </div>
-    )
-}
+            suffix=" % "
+          />
+        </Form.Item>
+        <Form.Item label="Unemployed: " name={['insurance','selfInfo','unemployed']}>
+          <Input
+            id="unemployed"
+            style={{ width: "60px" }}
+           
+            
+            suffix=" %"
+          />
+        </Form.Item>
+      </Space>
+    </div>
+  );
+};
 
-export default InsuranceSelfInfo
+export default InsuranceSelfInfo;

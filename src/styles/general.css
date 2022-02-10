@@ -18,6 +18,9 @@ text-align: right;
 .margin-top-20px{
 margin-top: 20px;
 }
+.margin-right-10px{
+    margin-right: 10px;
+}
 
 .table-row-dark {
     background-color: #EDEDED;
